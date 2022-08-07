@@ -5,10 +5,10 @@ import { autocompletion } from "@codemirror/autocomplete";
 const completionsList = [
   { label: "panic", type: "keyword" },
   { label: "park", type: "constant", info: "Test completion" },
-  { label: "password", type: "variable" }
+  { label: "password", type: "variable" },
 ];
 
-function myCompletions(context) {
+function langCompletions(context: any) {
   let before = context.matchBefore(/\w+/);
   // If completion wasn't explicitly started and there
   // is no word before the cursor, don't open completions.
@@ -16,8 +16,8 @@ function myCompletions(context) {
   return {
     from: before ? before.from : context.pos,
     options: completionsList,
-    validFor: /^\w*$/
+    validFor: /^\w*$/,
   };
 }
 
-export const completions = autocompletion({ override: [myCompletions] });
+export const completions = autocompletion({ override: [langCompletions] });

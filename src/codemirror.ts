@@ -1,34 +1,27 @@
 import {
   drawSelection,
-  // EditorView,
+  EditorView,
   highlightActiveLine,
   highlightSpecialChars,
   keymap,
   lineNumbers,
-  highlightActiveLineGutter
+  highlightActiveLineGutter,
 } from "@codemirror/view";
-import { EditorView } from "codemirror";
 import { EditorState } from "@codemirror/state";
 import { defaultKeymap, history, historyKeymap } from "@codemirror/commands";
 import { highlightSelectionMatches, searchKeymap } from "@codemirror/search";
-import { stex } from "@codemirror/legacy-modes/mode/stex";
 import { completions } from "./completion";
 import { wordHover } from "./hover-tooltip";
-// import { tags } from "@lezer/highlight";
+
 import {
   syntaxHighlighting,
-  // HighlightStyle,
   defaultHighlightStyle,
   indentOnInput,
-  StreamLanguage
 } from "@codemirror/language";
-// const myHighlightStyle = HighlightStyle.define([
-//   { tag: tags.keyword, color: "#fc6" },
-//   { tag: tags.comment, color: "#f5d", fontStyle: "italic" }
-// ]);
+import { antrl4Lang, getTokensForText } from "./antrl4-lang";
 
-const texLanguage = StreamLanguage.define(stex);
-export function createView({ doc, parent }) {
+export function createView({ doc, parent }: { doc: string; parent: any }) {
+  let firstUpdate = true;
   const extensions = [
     lineNumbers(),
     highlightActiveLineGutter(),
@@ -41,9 +34,17 @@ export function createView({ doc, parent }) {
     highlightActiveLine(),
     highlightSelectionMatches(),
     keymap.of([...defaultKeymap, ...searchKeymap, ...historyKeymap]),
-    texLanguage,
+    antrl4Lang,
     wordHover,
-    completions
+    completions,
+    EditorView.updateListener.of((update) => {
+      if (update.docChanged || firstUpdate) {
+        firstUpdate = false;
+        console.log("document has changed");
+        const text = update.view.state.doc.toString();
+        const tokens = getTokensForText(text);
+      }
+    }),
   ];
 
   const state = EditorState.create({ doc, extensions });

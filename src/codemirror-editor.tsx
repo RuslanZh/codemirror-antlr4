@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 
 import { createView } from "./codemirror";
 
-export default function CodeMirrorEditor({ doc }) {
+export default function CodeMirrorEditor({ doc }: { doc: string }) {
   const ref = useRef(null);
 
   useEffect(() => {
