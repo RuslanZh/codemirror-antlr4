@@ -2,7 +2,7 @@
 
 This project shows example of integration Antlr 4 grammar tool with Codemirror editor.
 
-# Getting Started with Create React App
+## Created with React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
