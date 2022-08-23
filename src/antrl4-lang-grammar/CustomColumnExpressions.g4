@@ -184,6 +184,6 @@ STRING_VALUE : '\'' .*? '\'' ;
 LPAREN: '(';
 RPAREN: ')';
 COMMA: ',';
-WHITESPACE : [ \t\r\n]+ -> skip ;
+WHITESPACE : [ \t\r\n]+ -> channel(HIDDEN);
 
 ANY : . ;

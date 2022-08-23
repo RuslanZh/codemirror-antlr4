@@ -14,6 +14,7 @@ import { VocabularyImpl } from "antlr4ts/VocabularyImpl";
 
 import * as Utils from "antlr4ts/misc/Utils";
 
+
 export class CustomColumnExpressionsLexer extends Lexer {
 	public static readonly ASTERISK = 1;
 	public static readonly SLASH = 2;
@@ -462,7 +463,7 @@ export class CustomColumnExpressionsLexer extends Lexer {
 		"\u02AF\xB0\x03\x02\x02\x02\"\x02\xEE\xF3\xF8\xFD\xFF\u0101\u013E\u014F" +
 		"\u0162\u0175\u0182\u0191\u019C\u01BA\u01D6\u01F4\u0220\u0242\u025A\u0261" +
 		"\u026A\u026F\u0273\u0278\u0280\u0287\u028C\u0292\u0294\u029C\u02AA\x03" +
-		"\b\x02\x02";
+		"\x02\x03\x02";
 	public static readonly _serializedATN: string = Utils.join(
 		[
 			CustomColumnExpressionsLexer._serializedATNSegment0,
